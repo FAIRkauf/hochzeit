@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Irina & Branko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Jost:wght@300;400&display=swap">
+<style>
+  :root{
+    --bg-a:#FBF1F0;
+    --bg-b:#EEF6F2;
+    --ink:#3F3A3C;
+    --muted:#8A8285;
+    --line:rgba(63,58,60,.14);
+    --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans:"Jost", "Helvetica Neue", Arial, sans-serif;
+  }
+  [hidden]{display:none!important}
+  html{background:var(--bg-a)}
+  body{
+    background:linear-gradient(160deg,var(--bg-a) 0%,#F8F5F3 50%,var(--bg-b) 100%) fixed;
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:1rem;
+    line-height:1.7;
+    padding:0 16px;
+    min-height:100vh;
+  }
+  .wrap{max-width:700px;margin:0 auto;padding-block:16vh 64px;display:flex;flex-direction:column;gap:88px}
+
+  .label{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:400}
+
+  header{display:flex;flex-direction:column;gap:22px;text-align:center}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.8rem,10vw,4.2rem);line-height:1.05;letter-spacing:.01em;margin:0}
+  h1 span{color:var(--muted)}
+  .date{font-size:.9rem;letter-spacing:.35em;margin:0;font-variant-numeric:tabular-nums}
+
+  .album{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+  .album p{margin:0;color:var(--muted);max-width:26rem}
+  .btn{
+    display:inline-block;
+    font-family:var(--sans);font-weight:400;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;
+    text-decoration:none;color:var(--ink);
+    border:1px solid var(--ink);
+    padding:16px 34px;
+    transition:background .2s ease,color .2s ease
+  }
+  .btn:hover{background:var(--ink);color:#fff}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+
+  .thanks-note{text-align:center;display:flex;flex-direction:column;gap:20px;align-items:center}
+  .thanks-note h2{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,6vw,2.4rem);line-height:1.2;margin:0;text-wrap:balance}
+  .thanks-note .btn{margin-top:14px}
+  .thanks-note p{margin:0;max-width:28rem;color:var(--ink);text-wrap:pretty}
+  .rule{width:40px;height:1px;background:var(--ink);opacity:.3;border:0;margin:0}
+
+  .how{display:flex;flex-direction:column;gap:28px;text-align:center}
+  .how h2{font-family:var(--serif);font-weight:300;font-size:1.8rem;line-height:1.2;margin:6px 0 0}
+  .how ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+  .how li{
+    background:rgba(255,255,255,.6);
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:4px;
+    padding:26px 20px 24px;
+    display:flex;flex-direction:column;gap:10px
+  }
+  .how li:nth-child(2){background:rgba(238,246,242,.8)}
+  .how li:nth-child(1),.how li:nth-child(3){background:rgba(251,241,240,.85)}
+  .how .ico{width:28px;height:28px;stroke:var(--ink);opacity:.75}
+  .how h3{font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1.2;margin:4px 0 0}
+  .how li p{margin:0;font-size:.92rem;color:var(--muted);line-height:1.6}
+  .how .note{margin:0;font-size:.92rem;color:var(--muted)}
+
+  .gallery{display:flex;flex-direction:column;gap:26px;scroll-margin-top:24px}
+  .gallery-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px}
+  .gallery-head h2{font-family:var(--serif);font-weight:300;font-size:1.8rem;line-height:1.2;margin:6px 0 0}
+  .count{font-variant-numeric:tabular-nums}
+  button.btn{background:transparent;cursor:pointer}
+  button.btn:disabled{opacity:.5;cursor:default}
+  button.btn:disabled:hover{background:transparent;color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .grid button{all:unset;cursor:zoom-in;display:block;aspect-ratio:1;overflow:hidden;background:rgba(255,255,255,.55)}
+  .grid button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  .grid button:hover img{transform:scale(1.03)}
+  .empty{
+    text-align:center;padding:56px 24px;
+    background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.9);border-radius:4px;
+    display:flex;flex-direction:column;gap:8px;align-items:center
+  }
+  .empty .ico{width:30px;height:30px;stroke:var(--ink);opacity:.6}
+  .empty h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;margin:6px 0 0}
+  .empty p{margin:0;color:var(--muted);max-width:24rem}
+  .msg{margin:0;text-align:center;font-size:.9rem;color:var(--muted);min-height:1.5em}
+
+  .lb{position:fixed;inset:0;z-index:10;background:rgba(40,36,38,.92);display:flex;flex-direction:column;
+      padding:calc(env(safe-area-inset-top,0px) + 14px) 16px calc(env(safe-area-inset-bottom,0px) + 18px);gap:14px}
+  .lb-bar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:.85rem;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+  .lb-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
+  .lb-stage img{max-width:100%;max-height:100%;object-fit:contain}
+  .lb button{font-family:var(--sans);font-weight:300;cursor:pointer}
+  .lb-x{background:none;border:0;color:#fff;font-size:1.8rem;line-height:1;padding:4px 8px}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.3rem}
+  .lb-prev{left:0}.lb-next{right:0}
+  .lb-foot{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .lb .btn{color:#fff;border-color:#fff;background:transparent}
+  .lb .btn:hover{background:#fff;color:var(--ink)}
+  .lb .msg{color:rgba(255,255,255,.75)}
+
+  footer{text-align:center;display:flex;flex-direction:column;gap:10px}
+  footer p{margin:0}
+  .thanks{font-family:var(--serif);font-weight:300;font-size:1.6rem}
+
+  @media (prefers-reduced-motion:reduce){.btn,.grid img{transition:none}}
+  @media (max-width:640px){.wrap{padding-block:12vh 48px;gap:72px}.how ol{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr);gap:4px}.gallery-head{justify-content:center;text-align:center}}
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0}
+  img{max-width:100%}
+  .packs{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;padding-top:8px}
+  .pack-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .pack-list .btn{padding:12px 20px;font-size:.72rem}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header>
+    <p class="label">Hochzeitsfotos</p>
+    <h1>Irina <span>&amp;</span> Branko</h1>
+    <p class="date">09.10.2026</p>
+  </header>
+
+  <section class="thanks-note" aria-labelledby="thx">
+    <h2 id="thx">Danke, dass ihr da wart</h2>
+    <hr class="rule">
+    <p>Ihr habt mit uns gelacht, getanzt und angestoßen und diesen Tag zu etwas ganz Besonderem gemacht. Wir sind so dankbar, dass wir ihn mit euch teilen durften.</p>
+    <p>Damit die Erinnerungen bleiben, haben wir alle Fotos für euch gesammelt.</p>
+    <a class="btn" href="#fotos">Zu den Fotos</a>
+  </section>
+
+  <section class="gallery" id="fotos" aria-labelledby="g-title">
+    <div class="gallery-head">
+      <div>
+        <p class="label">Unser Album <span class="count" id="count"></span></p>
+        <h2 id="g-title">Alle Fotos</h2>
+      </div>
+      
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M20.5 16l-5-5-9 8.5"/></svg>
+      <h3>Die Fotos sind bald da</h3>
+    </div>
+    <div class="packs" id="packs" hidden>
+      <p class="label">Alle Fotos auf einmal (ZIP)</p>
+      <div class="pack-list" id="packList"></div>
+    </div>
+  </section>
+
+  <section class="how" aria-labelledby="how-title">
+    <div>
+      <p class="label">Kleine Anleitung</p>
+      <h2 id="how-title">So nehmt ihr die Fotos mit</h2>
+    </div>
+    <ol>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M20.5 16l-5-5-9 8.5"/></svg>
+        <h3>Ein Lieblingsbild</h3>
+        <p>Foto antippen, dann auf „Foto herunterladen“. Schon ist es auf eurem Handy.</p>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 16.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg>
+        <h3>Gleich alle</h3>
+        <p>Unter dem Album die ZIP-Pakete antippen. Darin sind alle Fotos gesammelt, bequem für Laptop oder PC.</p>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5a1.5 1.5 0 0 1 1.5-1.5h2.2l1.5-2h5.6l1.5 2h2.2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="12.8" r="3.3"/></svg>
+        <h3>Eure Schnappschüsse</h3>
+        <p>Ihr habt selbst schöne Momente eingefangen? Schickt sie uns gern, wir packen sie mit ins Album.</p>
+      </li>
+    </ol>
+    <p class="note">Klappt das Speichern einmal nicht? Dann das Foto öffnen, lange gedrückt halten und „Bild sichern“ wählen.</p>
+  </section>
+
+  <footer>
+    <p class="label">Von Herzen</p>
+    <p class="thanks">Irina &amp; Branko</p>
+  </footer>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto ansehen">
+  <div class="lb-bar"><span id="lbPos"></span><button class="lb-x" id="lbClose" type="button" aria-label="Schließen">&times;</button></div>
+  <div class="lb-stage">
+    <img id="lbImg" alt="">
+    <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Vorheriges Foto">&#8249;</button>
+    <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Nächstes Foto">&#8250;</button>
+  </div>
+  <div class="lb-foot">
+    <a class="btn" id="lbSave" href="#" download>Foto herunterladen</a>
+  </div>
+</div>
+
+<script src="fotos.js"></script>
+<script>
+(function(){
+  var photos = (window.FOTOS || []), packs = (window.PAKETE || []);
+  var grid = document.getElementById('grid'), empty = document.getElementById('empty');
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+  var lbPos = document.getElementById('lbPos'), lbSave = document.getElementById('lbSave');
+  var cur = 0;
+
+  if (!photos.length) { empty.hidden = false; grid.hidden = true; }
+  else {
+    document.getElementById('count').textContent = '· ' + photos.length + ' Fotos';
+    photos.forEach(function(f, i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Foto ' + (i+1) + ' öffnen');
+      var img = document.createElement('img');
+      img.src = 'fotos/' + (f.klein || f.gross); img.alt = 'Hochzeitsfoto ' + (i+1); img.loading = 'lazy'; img.decoding = 'async';
+      b.appendChild(img); b.addEventListener('click', function(){ open(i); });
+      grid.appendChild(b);
+    });
+  }
+  if (packs.length) {
+    var pl = document.getElementById('packList');
+    packs.forEach(function(p){
+      var a = document.createElement('a'); a.className = 'btn'; a.href = 'downloads/' + p.datei; a.setAttribute('download', '');
+      a.textContent = p.titel; pl.appendChild(a);
+    });
+    document.getElementById('packs').hidden = false;
+  }
+
+  function show(){
+    var f = photos[cur];
+    lbImg.src = 'fotos/' + f.gross; lbImg.alt = 'Hochzeitsfoto ' + (cur+1);
+    lbPos.textContent = (cur+1) + ' / ' + photos.length;
+    lbSave.href = 'fotos/' + f.gross;
+    lbSave.setAttribute('download', 'Irina-Branko-' + String(cur+1).padStart(3,'0') + '.jpg');
+  }
+  function open(i){ cur = i; show(); lb.hidden = false; document.body.style.overflow = 'hidden'; document.getElementById('lbClose').focus(); }
+  function close(){ lb.hidden = true; document.body.style.overflow = ''; }
+  function step(d){ cur = (cur + d + photos.length) % photos.length; show(); }
+  document.getElementById('lbClose').onclick = close;
+  document.getElementById('lbPrev').onclick = function(){ step(-1); };
+  document.getElementById('lbNext').onclick = function(){ step(1); };
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target.classList.contains('lb-stage')) close(); });
+  document.addEventListener('keydown', function(e){
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') step(-1); else if (e.key === 'ArrowRight') step(1);
+  });
+  var tx = null;
+  lb.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', function(e){ if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1); tx = null; });
+})();
+</script>
+</body>
+</html>
